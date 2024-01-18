@@ -1,0 +1,8 @@
+Refer to main.mlx for using them. Not sure if the ‘convertResultsCsvToTabDelimited.m’ file is needed – it might be old.
+Note: I think the files assume that they live in a directory called ‘MTurk’ which also has the following sub directory architecture:
+‘PSHF_Humerus_Segmentation’
+‘Batches’
+‘[Batch_X_Date]’
+‘tiff_images’
+‘results’
+input.csv’
