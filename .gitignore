@@ -1,5 +1,5 @@
 # Turk local data i.e. images and batch info.
-PSHF_Humerus_Segmentation/*
+data/PSHF_Humerus_Segmentation/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

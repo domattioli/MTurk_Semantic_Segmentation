@@ -1,9 +1,9 @@
-function success = writeBatchResultFile( resultTable, thresh, resultFFN )
+function saveFFN = writeBatchResultFile( resultTable, thresh, resultFFN )
 %WRITEBATCHRESULTFILE Write result table as .mat file in batch directory.
-%   success = WRITEBATCHRESULTFILE( resultTable, thresh, resultFFN ) returns binary
-%   'success' to indicate a successful writing of the resultTable variable
-%   as a .mat file to the path of the batch result file 'resultFFN'.
-%   
+%   saveFFN = WRITEBATCHRESULTFILE( resultTable, thresh, resultFFN )
+%   returns the path of the batch result file 'resultFFN', written as a
+%   .mat data representation of the inputted resultTable.
+%
 %   See also: DECODEBATCHRESULTS, WRITEINPUTCSV, VISUALIZERESULTS.
 %==========================================================================
 
@@ -16,10 +16,4 @@ nargoutchk( 0, 1 );
 [pn, fn] = fileparts( resultFFN );
 tn = num2str( thresh );
 saveFFN = fullfile( pn, strcat( fn, '-graded-Thresh_', tn(3:end), '.mat' ) );
-try
-    save( saveFFN, 'resultTable' );
-    success = true;
-catch
-    success = false;
-    warning( 'Save failed' );
-end
+save( saveFFN, 'resultTable' );
