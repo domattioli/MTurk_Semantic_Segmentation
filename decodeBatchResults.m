@@ -9,7 +9,10 @@ function [success, resultTable] = decodeBatchResults( fullFileName, targetSize, 
 %   GRADETURKERSUBMISSIONS, WRITEBATCHRESULTFILE.
 %==========================================================================
 
+
+% Check I/O.
 narginchk( 1, 3 );
+nargoutchk( 0, 2 );
 if nargin == 1
     targetSize = [512 512];
     T = 0.95;
@@ -40,9 +43,8 @@ try
     % accepting and rejecting the turker data. NOTE: possible bug causer
     modifiedFullFileName = fullfile( rfp, modifiedResultFileName );
     success = convertResultsCsvToTabDelimited( fullFileName, modifiedFullFileName );
-    if ~success
-        error( 'failed to delimit batch result csv file.' );
-    end
+    assert(success, 'Failed to delimit batch result csv file.');
+    
     turkTable = readtable( modifiedFullFileName, 'delimiter', '\t',...
         'ExpectedNumVariables', numel( colNames )-2 );
     delete( modifiedFullFileName ); % TO-DO: function above should be renamed and designed to output the table and delete the new temp file.

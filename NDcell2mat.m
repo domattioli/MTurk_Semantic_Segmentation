@@ -4,13 +4,13 @@ function M = NDcell2Mat( C, V )
 %   contents of the same data type into a single matrix M. There is no
 %   need for the dimensions of the cell's contents to match.
 %
-%   M = NDCELL2MAT( C, V ) fills in incongruent dimensions with
-%   inputted value V, where V must be numeric.
+%   M = NDCELL2MAT( C, V ) fills in incongruent dimensions specified by V.
+%   V must be a numeric value that specified the values that fill in the
+%   output M where values did not expist in that dimension of input C.
+%   Acceptable inputs for V are: nan, 0, or 1.
 %
 %   NDCELL2MAT currently only supports numeric data.
-%
-%   Written by: Dominik Mattioli
-%   Code revised by: Stephen Cobeldick (https://www.mathworks.com/matlabcentral/profile/authors/3102170)
+%   
 %   % Example:  5x1
 %   C = { [0]; [1 2 3]; [4; 5]; NaN; [6 7 8 9 10] };
 %   M = NDCELL2MAT( C )
@@ -38,12 +38,21 @@ function M = NDcell2Mat( C, V )
 %   end
 %   M   = NDCELL2MAT( C, randi( 100, 1 ) ) % View all nodes' neighbors at once.
 %
+%
+%   Written by: Dominik Mattioli
+%   Functionality revisions suggested by: Stephen Cobeldick
+%   (https://www.mathworks.com/matlabcentral/profile/authors/3102170).
+%
 %   See also cell2mat.
 %==========================================================================
 
 % Check input.
+narginchk( 1, 2 );
+nargoutchk( 0, 1 );
 if nargin == 2
-    if isstring( V )
+    if isstring( V ) || ischar( V )
+        warning( ['Inputted filler value ''%s'' detected as string when numeric was expected; ',...
+            'output may not be as expected/error may result.'], V );
         if strcmpi( V, 'NaN' ) || strcmpi( V, 'NaNs' )
             V   = NaN;
         elseif strcmpi( V, 'Zero' ) || strcmpi( V, 'Zeros' ) || strcmpi( V, '0' )
@@ -61,10 +70,10 @@ if nargin == 2
         end
     end
 end
-if ~all( cell2mat( cellfun( @isnumeric, C( : ), 'UniformOutput', false ) ) )
-    error( sprintf( ['Inputted cell array contains elements that are non-numeric.\n',...
-        'Check to make sure that you do not have nested cells or structs.'] ) );
-end
+assert(all(cell2mat(cellfun(@isnumeric, C(:), 'UniformOutput', false))), ...
+    ['Inputted cell array contains elements that are non-numeric.',...
+    'Check that C does not contain nested cells or non-numeric data.'] );
+
 
 % Pre-assign output.
 S	= horzcat( size( C ), 1 );

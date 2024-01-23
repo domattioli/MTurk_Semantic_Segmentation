@@ -1,4 +1,9 @@
 function success = convertResultsCsvToTabDelimited(inputFilePath, outputFilePath)
+
+% Check I/O.
+narginchk( 2, 2 );
+nargoutchk( 0, 1 );
+
 % Read the raw text data
 try
     rawText = fileread(inputFilePath);
@@ -12,6 +17,6 @@ try
     fclose(fid);
     success = true;
 catch
-    success = false
+    success = false;
 end
 end

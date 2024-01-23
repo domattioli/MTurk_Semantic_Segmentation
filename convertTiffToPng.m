@@ -2,17 +2,17 @@ function [success, pngImgs, pngDir] = convertTiffToPng( inDir, targetDim )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
+% Check I/O.
 narginchk( 1, 2 );
 nargoutchk( 0, 3 );
-if ~isfolder( inDir )
-    error('The inputted subdirectory does not exist.');
-end
+assert( isfolder( inDir ), 'The inputted subdirectory does not exist.' );
+
 tiffImagesDir = fullfile( inDir, 'tiff_images' );
 if ~isfolder( tiffImagesDir )
     mkdir( tiffImagesDir );
 end
 
-if nargin == 1;
+if nargin == 1
     targetDim = 512;
 end
 

@@ -1,7 +1,5 @@
-function [success, outFFN] = writeInputCSV( s3BatchFolder, pngFolder )
+function [success, outFFN] = writeInputCSV( s3BatchFolder )
 % Inputs:
-%   pngFolder = ...'\Batches\2024_01_02\png_images'
-%   
 %   s3BatchFolder    -- s3 bucket parent folder where images are hosted. Need
 %                   this for writing the batch's text file. e.g.,
 % 
@@ -9,7 +7,8 @@ function [success, outFFN] = writeInputCSV( s3BatchFolder, pngFolder )
 %   success -- binary informing whether the process was fully completed.
 %   outFFN = input.csv file's ffn, written to parent of pngFolder.
 
-narginchk( 2, 2 );
+% Check I/O.
+narginchk( 1, 1 );
 nargoutchk( 0, 2 );
 
 try

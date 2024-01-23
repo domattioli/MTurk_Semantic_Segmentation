@@ -13,6 +13,7 @@ function [success, visTable] = visualizeResults( resultTable, thresh, resultFFN,
 %   See also: DECODEBATCHRESULTS, WRITEBATCHRESULTFILE.
 %==========================================================================
 
+% Check I/O.
 narginchk( 3, 4 );
 nargoutchk( 0, 2 );
 

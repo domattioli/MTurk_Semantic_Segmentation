@@ -12,6 +12,7 @@ function [success, img, ffn, fid] = decodeTurkEncodings( bitEncodingChar )
 %   See also: DECODEBATCHRESULTS
 %==========================================================================
 
+% Check I/O.
 narginchk( 1, 1 );
 nargoutchk( 0, 4 );
 if iscell( bitEncodingChar )

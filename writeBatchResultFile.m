@@ -7,6 +7,7 @@ function success = writeBatchResultFile( resultTable, thresh, resultFFN )
 %   See also: DECODEBATCHRESULTS, WRITEINPUTCSV, VISUALIZERESULTS.
 %==========================================================================
 
+% Check I/O.
 narginchk( 2, 3 ); % Revised to require thresh to be inputted so we can write a more descript fn.
 nargoutchk( 0, 1 );
 

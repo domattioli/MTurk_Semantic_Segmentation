@@ -1,8 +1,15 @@
 function [finalStaple, indices] = HITL_TurkAppraisal( baseImg, individualBWs, stapledBW, T )
+%HITL_TurkAppraisal is a work in-progress applet prototype for graphically
+%displaying turker submissions and their aggregate STAPLE outline. The
+%applet allows the user to remove the former and update the latter.
+%
 % TO-DO:Eventually use Label property and some radiobuttons so user can toggle  on/off instead of deleting.
 % TO-DO: autocompute locations of radio buttons.
 % To-do: toggle switch should compute (and store) dice coefficient and
 % display to user.
+
+
+% Check I/O.
 narginchk( 4, 4 );
 nargoutchk( 0, 2 );
 
