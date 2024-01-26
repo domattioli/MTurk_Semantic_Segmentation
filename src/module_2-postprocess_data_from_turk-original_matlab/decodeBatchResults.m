@@ -20,19 +20,23 @@ elseif nargin == 2
     T = 0.95;
 end
 
+% Helper file in module_2 folder
+% executingFileFFN = matlab.desktop.editor.getActiveFilename;
+mfilePath = mfilename( 'fullpath' );
+if contains( mfilePath,'LiveEditorEvaluationHelper' )
+    mfilePath = matlab.desktop.editor.getActiveFilename;
+end
+module2PN = fileparts( mfilePath );
+colNameReferenceFileName = 'batch_csv_col_names.txt';
+colNameReferenceFFN = fullfile( module2PN, colNameReferenceFileName );
 
-colNameReferenceFileName = 'batch_csv_col_names.txt'; % hardcoded
-
-% Discern names of folders, subfolders, file.
+% Discern names of folders, subfolders, file. for editing result file.
 [rfp, rfn, e] = fileparts( fullFileName );
 batchFullFolderName = fileparts( rfp );
 pngFullFolderName = fullfile( batchFullFolderName, 'png_images' );
-projectFullFolderName = fileparts( fileparts( fileparts( batchFullFolderName ) ) );
-resultFileName = strcat( rfn, e );
 modifiedResultFileName = strcat( rfn, '-modified', e );
 
 % Read in reference file for column names for reading batch data.
-colNameReferenceFFN = fullfile( projectFullFolderName, colNameReferenceFileName );
 fid = fopen( colNameReferenceFFN, 'r' );
 headerStr = fgetl( fid );
 fclose( fid );

@@ -21,7 +21,7 @@ function visTable = visualizeResults( resultTable, thresh, resultFFN, targetSize
 narginchk( 3, 4 );
 nargoutchk( 0, 1 );
 
-[pn, ~] = fileparts( resultFFN );
+pn = fileparts( fileparts( resultFFN ) );
 tn = num2str( thresh );
 analysisPN = fullfile( pn, strcat( 'Analysis-Thresh_', tn(3:end) ) );
 overlaidPN = fullfile( analysisPN, 'Individual_Overlaid' );
