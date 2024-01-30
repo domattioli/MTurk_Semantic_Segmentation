@@ -1,4 +1,4 @@
-function outFFN = writeInputCSV( s3BatchFolder )
+function outFFN = writeInputCSV( pngDir, s3BatchFolder )
 %WRITEINPUTCSV Generate input.csv text file for turk job batch.
 %   outFFN = WRITEINPUTCSV( s3BatchFolder ) returns the outputted full file
 %   name for the generated csv file. Note that the inputted folder must
@@ -16,7 +16,7 @@ function outFFN = writeInputCSV( s3BatchFolder )
 
 
 % Check I/O.
-narginchk( 1, 1 );
+narginchk( 2, 2 ); %to-do
 nargoutchk( 0, 1 );
 
 % Concatenate s3FolderName with all png file names and extensions

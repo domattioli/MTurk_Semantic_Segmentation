@@ -1,6 +1,6 @@
-function [pngImgs, pngDir] = convertTiffToPng( inDir, targetSize )
+function [pngImgs, pngDir] = convertTiffToPng( batchDir, targetSize )
 %CONVERTTIFFTOPNG Convert (write copies of) select png images to tiff format.
-%   [pngImgs, pngDir] = convertTiffToPng( inDir, targetSize ) returns an
+%   [pngImgs, pngDir] = convertTiffToPng( batchDir, targetSize ) returns an
 %   RxCxN image data matrix pngImgs corresponding to the reformatted copies
 %   of images specified in the inputted inDdir and the target image
 %   dimensions specified by targetSize, which must be [R C].
@@ -13,10 +13,10 @@ function [pngImgs, pngDir] = convertTiffToPng( inDir, targetSize )
 % Check I/O.
 narginchk( 1, 2 );
 nargoutchk( 0, 2 );
-assert( ischar( inDir ), 'Inputted inDir must be a char.' );
-assert( isfolder( inDir ), 'Inputted subdirectory does not exist.' );
+assert( ischar( batchDir ), 'Inputted inDir must be a char.' );
+assert( isfolder( batchDir ), 'Inputted subdirectory does not exist.' );
 
-tiffImagesDir = fullfile( inDir, 'tiff_images' );
+tiffImagesDir = fullfile( batchDir, 'tiff_images' );
 if ~isfolder( tiffImagesDir )
     mkdir( tiffImagesDir );
 end
@@ -24,13 +24,13 @@ end
 if nargin == 1
     targetSize = 512;
 else
-    assert( isnumeric( targetSize ) & numel( targetSize ) == 2,...
-        'The inputted targetSize must be a numeric verctor of length 2.' );
+    assert( isnumeric( targetSize ) & numel( targetSize ) <= 2,...
+        'The inputted targetSize must be a numeric vector w 1-2 elems.' );
 end
 
 
 % Create 'png_images' subdirectory if it doesn't exist
-pngDir = fullfile( inDir, 'png_images' );
+pngDir = fullfile( batchDir, 'png_images' );
 if ~isfolder( pngDir )
     mkdir( pngDir );
 end

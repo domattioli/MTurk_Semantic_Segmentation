@@ -1,6 +1,6 @@
 # Turk local data i.e. images and batch info.
 data/*
-docs/powerpoints/*
+docs/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
