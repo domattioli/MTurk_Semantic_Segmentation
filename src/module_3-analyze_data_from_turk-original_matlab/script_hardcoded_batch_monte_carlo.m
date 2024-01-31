@@ -1,6 +1,10 @@
 targetSize = [512,512];
-batchFolderName = 'C:\Users\dmattioli\Projects\MTurk\PSHF_Humerus_Segmentation\Batches\2023_12_19';
-resultFileName = 'Batch_5169454_batch_results.csv';
+% batchFolderName = 'C:\Users\dmattioli\Projects\MTurk\PSHF_Humerus_Segmentation\Batches\2023_12_19';
+batchFolderName = 'C:\Users\dmattioli\Projects\MTurk\PSHF_Humerus_Segmentation\Batches\2024_01_30';
+
+% resultFileName = 'Batch_5169454_batch_results.csv';
+resultFileName = 'Batch_5181805_batch_results.csv';
+
 varNames = {'HITId','HITTypeId','Title','Description','Keywords','Reward',...
     'CreationTime','MaxAssignments','RequesterAnnotation','AssignmentDurationInSeconds',...
     'AutoApprovalDelayInSeconds','Expiration','NumberOfSimilarHITs','LifetimeInSeconds',...

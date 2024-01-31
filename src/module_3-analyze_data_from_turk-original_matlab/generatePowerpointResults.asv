@@ -27,47 +27,44 @@ import mlreportgen.ppt.*
 slides = Presentation( pptFFN );
 if nargin == 4 % TO-do: There must be a more efficient way to do this...
     newPicObjects = cell( numImages, 1 );
-    open( slides )
     for idx = 1:numImages
-        newSlide = add( slides, 'Blank' );
         newPicObjects{ idx } = Picture( which( ffns{ idx } ) );
         newPicObjects{ idx }.Width = widthHeightCellStr{ 1 };
         newPicObjects{ idx }.Height = widthHeightCellStr{ 2 };
-        add( newSlide, newPicObjects{ idx } );
     end
-    close( slides );
-    % % Index slicing
-    % I = slideInd;
-    % L = 1:numel( slides.Children );
-    % out = cell( 1, length(I) + 1 );
-    % for i = 1:length(I)
-    %     if i == 1
-    %         out{i} = slides.Children( L(1:I(i)) );
-    %     else
-    %         out{i} = slides.Children( L((I(i-1)+1):I(i)) );
-    %     end
-    % end
-    % out{end} = slides.Children( L((I(end)+1):end) );
-    % 
-    % % Extend existing pres with copies of slides.
-    % tmpSlideCopies = slides.Children( 1:numImages );
-    % tmp = repmat( out, 2, 1 );
-    % for idx = 1:numel( slideInd )
-    %     tmp{ 2, idx } = tmpSlideCopies( idx );
-    %     replace( tmp{ 2, idx }, 'Picture', newPicObjects{ idx } )
-    % end
-    % tmp( end ) = [];
-    % 
-    % % Reassemble and rewrite as new.
-    % tmp2 = cellfun( @transpose, tmp, 'UniformOutput', 0 );
-    % newSlidesOrder = vertcat( tmp2{ : } );
-    % close( slides )
-    % slides2 = Presentation( pptFFN );
-    % for idx = 1:numel( newSlidesOrder )
-    %     slidetmp = add( slides2, 'Blank' );
-    %     add( slidetmp, newSlidesOrder( 1 ).Children( end ) );
-    % end
-    % close( slides2 );
+
+    % Index slicing
+    I = slideInd;
+    L = 1:numel( slides.Children );
+    out = cell( 1, length(I) + 1 );
+    for i = 1:length(I)
+        if i == 1
+            out{i} = slides.Children( L(1:I(i)) );
+        else
+            out{i} = slides.Children( L((I(i-1)+1):I(i)) );
+        end
+    end
+    out{end} = slides.Children( L((I(end)+1):end) );
+    
+    % Extend existing pres with copies of slides.
+    tmpSlideCopies = slides.Children( 1:numImages );
+    tmp = repmat( out, 2, 1 );
+    for idx = 1:numel( slideInd )
+        tmp{ 2, idx } = tmpSlideCopies( idx );
+        replace( tmp{ 2, idx }, 'Picture', newPicObjects{ idx } )
+    end
+    tmp( end ) = [];
+
+    % Reassemble and rewrite as new.
+    tmp2 = cellfun( @transpose, tmp, 'UniformOutput', 0 );
+    newSlidesOrder = vertcat( tmp2{ : } );
+    close( slides )
+    slides2 = Presentation( pptFFN );
+    for idx = 1:numel( newSlidesOrder )
+        slidetmp = add( slides2, 'Blank' );
+        add( slidetmp, newSlidesOrder( 1 ).Children( end ) );
+    end
+    close( slides2 );
 else
     for idx = 1:numImages
         picSlideIdx = add( slides, 'Blank' );
