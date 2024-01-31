@@ -38,6 +38,7 @@ end
 
 % Convert each TIFF file to PNG and save in 'png_images'
 tiffFiles = dir( fullfile( tiffImagesDir, '*.tiff' ) );
+existingPngFiles = dir( fullfile( tiffImagesDir, '*.png' ) );
 targetSize = horzcat( targetSize, targetSize, numel( tiffFiles ) );
 pngImgs =  NaN( targetSize );
 for i = 1:length( tiffFiles )
@@ -48,4 +49,10 @@ for i = 1:length( tiffFiles )
     pngFilePath = fullfile( pngDir, [imageName, '.png']);
     imwrite( pngImgs( :, :, i ), pngFilePath);
 end
+% Append existing PNGs in png_images to pngImgs variable
+for i = 1:length(existingPngFiles)
+    existingPngFilePath = fullfile(pngDir,existingPngFiles(i).name);
+    pngImgs( :, :, i+length(tiffFiles) ) = im2double( imresize( imread(existingPngFilePath), targetSize( 1:2 ) ) );
+end
+
 

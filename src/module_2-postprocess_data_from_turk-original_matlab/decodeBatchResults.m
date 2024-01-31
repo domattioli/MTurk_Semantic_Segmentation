@@ -33,7 +33,8 @@ colNameReferenceFFN = fullfile( module2PN, colNameReferenceFileName );
 
 % Discern names of folders, subfolders, file. for editing result file.
 [rfp, rfn, e] = fileparts( fullFileName );
-batchFullFolderName = fileparts( rfp );
+%batchFullFolderName = fileparts( rfp );
+batchFullFolderName = rfp;
 pngFullFolderName = fullfile( batchFullFolderName, 'png_images' );
 modifiedResultFileName = strcat( rfn, '-modified', e );
 
@@ -83,7 +84,8 @@ variableTypes = { 'double', 'struct', 'logical', 'string' };
 resultTable = table( 'Size', [numImages, numel( resultColNames )],...
     'VariableNames', resultColNames, 'VariableTypes', variableTypes);
 resultTable.Properties.RowNames = imageNames( :, 2 );
-resultTable.s3url = vertcat( imageNames{ :, 1 } );
+%resultTable.s3url = vertcat( imageNames{ :, 1 } );
+resultTable.s3url = vertcat( imageNames( :, 1 ) );
 
 % Preallocate for known variable data.
 numPixels = prod( targetSize );
