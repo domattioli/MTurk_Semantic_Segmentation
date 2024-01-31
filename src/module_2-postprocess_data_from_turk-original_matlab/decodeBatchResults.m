@@ -6,7 +6,8 @@ function resultTable = decodeBatchResults( fullFileName, targetSize, T )
 %   targetSize variable is optional and will default to [512 512].
 %
 %   See also STAPLE, PREPROCESSIMAGESFORMTURKBATCHES, DECODETURKENCODINGS,
-%   GRADETURKERSUBMISSIONS, WRITEBATCHRESULTFILE.
+%   GRADETURKERSUBMISSIONS, WRITEBATCHRESULTFILE,
+%   AGGREGATEINDIVIDUALTURKERDATA.
 %==========================================================================
 
 

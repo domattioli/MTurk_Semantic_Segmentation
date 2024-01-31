@@ -137,20 +137,19 @@ for idx = 1:numImages
         visTable.Stats( idx ).Upper_Whisker] = bounds( bpYData( ~isout, idx ), 'omitnan' );
 end
 
-%-----------------------------------------
 % Histogram of turker individual grades
 turkerDiceScores = cellfun( @table2array, turkerTable.Grades, 'uniformoutput', 0 );
 allDiceScores = cell2mat( turkerDiceScores ); % Ignore sensitivity and specificity.
 allDiceScores = allDiceScores( : , 1 );
-fitg = figure( 'visible', 'off', 'color', 'w', 'WindowState', 'maximized' );
+fitg = figure( 'visible', 'on', 'color', 'w', 'WindowState', 'maximized' );
 subplot( 4, 1, 4 );
 axitgh = gca;
 allDiceScoresHist = histogram( allDiceScores, 'Parent', axitgh );
-xlabel( 'Individual Accuracies w.r.t. Group', 'FontSize', 15, 'Interpreter', 'latex' );
+xlabel( 'Individual Similarities w.r.t. Group', 'FontSize', 15, 'Interpreter', 'latex' );
 axitgh.YLim( 2 ) = round( max( allDiceScoresHist.Values ), -2 );
 axitgh.XLim = [-0.025 1.025];
 ylabel( 'Count', 'FontSize', 15, 'Interpreter', 'latex' );
-% title( 'Histogram of Individual Turker Performance Across All Images' , 'FontSize', 20, 'Interpreter', 'latex' );
+title( 'Histogram of Individual Turker Performance Across All Images' , 'FontSize', 20, 'Interpreter', 'latex' );
 
 % Individual boxplots and swarm of turker data.
 subplot( 4, 1, 1:3 );
@@ -167,16 +166,13 @@ size( itbpXData )
 size(turkerBoxPlotData  )
 itsp = swarmchart( axitbp, itbpXData, turkerBoxPlotData, scSize, scMarker, XJitter='rand', XJitterWidth=scJitWidth );
 xlabel( 'Unique Turker', 'FontSize', 15, 'Interpreter', 'latex' );
-axitbp.YLim = [-0.05 1.05];
-ylabel( 'Accuracy of Submission (Dice Coefficient)', 'FontSize', 15, 'Interpreter', 'latex' );
-title( 'Individual Turker Performance Across All Images' , 'FontSize', 20, 'Interpreter', 'latex' );
+axitbp.YLim = [-0.025 1.05];
+ylabel( 'Count', 'FontSize', 15, 'Interpreter', 'latex' );
+title( 'Histogram of Individual Turker Performance Across All Images' , 'FontSize', 20, 'Interpreter', 'latex' );
 
 
 % Save visualization(s).
-exportgraphics( fbp, fullfile( otherPlotsPN, 'Dice_Accuracy-Per_Image.tiff' ) );
-savefig( fbp, fullfile( otherPlotsPN, 'Dice_Accuracy-Per_Image.fig' ), 'compact' );
-exportgraphics( fitg, fullfile( otherPlotsPN, 'Dice_Accuracy-Per_Turker.tiff' ) );
-savefig( fitg, fullfile( otherPlotsPN, 'Dice_Accuracy-Per_Turker.fig' ), 'compact' );
+exportgraphics( fbp, fullfile( otherPlotsPN, 'Box_and_Swarm_plots.tiff' ) );
+savefig( fbp, fullfile( otherPlotsPN, 'Box_and_Swarm_plots.fig' ), 'compact' );
 close( fbp );
-close( fitg );
 
