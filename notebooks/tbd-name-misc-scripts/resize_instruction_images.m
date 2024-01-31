@@ -18,7 +18,8 @@ ffn([1:2, end]) = [];
 numImgs = numel( ffn );
 for idx = 1:numImgs
     i = imread( ffn{idx} );
-    i = i ./ max( i( : ) );
+    i = double( i - min( i( : ) ) ) / double( max( i( : ) ) );
+    % i = i ./ max( i( : ) );
     [~,fn,ex]=fileparts(ffn{idx});
     imwrite(imresize(i, targetSize), fullfile( targetFFN, [fn, ex]));
 end

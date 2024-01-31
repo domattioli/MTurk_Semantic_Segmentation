@@ -1,4 +1,5 @@
-function visTable = visualizeResults( resultTable, thresh, resultFFN, targetSize )
+function [visTable, overlaidPN, otherPlotsPN] = visualizeResults(...
+    resultTable, thresh, resultFFN, targetSize )
 %VISUALIZERESULTS Visualize overlays of individual submissions on gt.
 %   visTable = visualizeResults( resultTable, thresh, resultFFN, targetSize ) returns binary
 %   'success' to indicate a successful writing of the resultTable variable.
@@ -14,12 +15,13 @@ function visTable = visualizeResults( resultTable, thresh, resultFFN, targetSize
 %       without the individual turker segmentations.
 %       -  Resulting images arewritten to the batch's result dir resultFFN.
 %
-%   See also: STAPLE, DECODEBATCHRESULTS, WRITEBATCHRESULTFILE.
+%   See also: STAPLE, DECODEBATCHRESULTS, WRITEBATCHRESULTFILE, 
+%   GENERATEPOWERPOINTRESULTS.
 %==========================================================================
 
 % Check I/O.
 narginchk( 3, 4 );
-nargoutchk( 0, 1 );
+nargoutchk( 0, 3 );
 
 pn = fileparts( fileparts( resultFFN ) );
 tn = num2str( thresh );
