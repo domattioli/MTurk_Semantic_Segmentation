@@ -101,8 +101,10 @@ bw = false( targetSize );
 % Iterate through each row (submission) to aggregate the data.
 for idx = 1:numImages
     pngName = strcat( imageNames{ idx, 2 }, '.png' );
+    %resultTable.srcImage( idx, : ) = reshape( imresize( imread( fullfile(...
+    %    pngFullFolderName, pngName ) ), targetSize ), 1, numPixels );
     resultTable.srcImage( idx, : ) = reshape( imresize( imread( fullfile(...
-        pngFullFolderName, pngName ) ), targetSize ), 1, numPixels );
+       pngFullFolderName, pngName ) ), targetSize ), 1, numPixels );
 
     % Grab data from turkers who worked on this image.
     it = contains( searchSpace, pngName );
